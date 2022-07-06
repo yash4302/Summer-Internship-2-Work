@@ -1,0 +1,69 @@
+<!-- <div class="collapse" id="navbarToggleExternalContent">
+  <div class="bg-dark p-4">
+    <h5 class="text-white h4">Collapsed content</h5>
+    <span class="text-muted">Toggleable via the navbar brand.</span>
+  </div>
+</div> -->
+
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button> -->
+
+    <a class="navbar-brand" href="#">Notepad</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav d-flex">
+        <!-- <li class="nav-item">
+          <a class="btn btn-primary">Home</a>
+        </li>
+
+        <li class="nav-item">
+          <button class="btn btn-success">Add Note</button>
+        </li> -->
+
+        <li class="btn-group nav-item" role="group" aria-label="Basic example">
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">New Note</button>
+          <button type="button" class="btn btn-danger" (click)="clearAllNotes()">Clear All</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <form (ngSubmit)="addNote()" [formGroup]="newNoteForm">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">New Note</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+          <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="floatingTitle" placeholder="New Note" formControlName="title" [class.is-invalid]="!formResetting" />
+            <label for="floatingTitle">Title of Note</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <textarea class="form-control" placeholder="Note" id="floatingNote" formControlName="note" style="height: 100px" [class.is-invalid]="!formResetting"></textarea>
+            <label for="floatingNote">Note</label>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button id="closeModal" type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Create</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

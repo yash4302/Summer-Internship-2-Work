@@ -1,0 +1,30 @@
+<div class="form-wrapper">
+  <msi-card>
+    <msi-card-title class="msi-border-primary-10">
+      <msi-icon name="ic_emsignia" [size]="24"></msi-icon> &nbsp;
+      <span>Sign In</span>
+    </msi-card-title>
+
+    <msi-card-content>
+      <form action="" [formGroup]="loginForm" (ngSubmit)="login()">
+        <span class="msi-text-alert login-error-text" *ngIf="isSubmitted && loginForm.invalid">
+          We didn't recognize the username or password you entered. Please try again.
+        </span>
+        <label class="msi-label" for="username">
+          User Name/ID
+        </label>
+        <input class="msi-input" type="text" id="username" autocomplete="username" formControlName="userName">
+
+        <label class="msi-label" for="password">
+          Password
+        </label>
+        <input class="msi-input" type="password" id="password" autocomplete="current-password" formControlName="password">
+
+        <div class="checkbox-button-wrapper">
+          <msi-checkbox formControlName="rememberMe">Remember my username</msi-checkbox>
+          <button type="submit" class="msi-btn" style="margin-top: 8px;">Log In</button>
+        </div>
+      </form>
+    </msi-card-content>
+  </msi-card>
+</div>

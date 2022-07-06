@@ -1,0 +1,2 @@
+NodeJS: 15.0.1
+Angular: 12.0.0

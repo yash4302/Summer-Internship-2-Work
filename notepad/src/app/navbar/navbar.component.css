@@ -1,0 +1,11 @@
+.navbar-collapse {
+  justify-content: flex-end;
+}
+
+.navbar-nav {
+  align-items: center;
+}
+
+.nav-item {
+  margin-left: 10px;
+}

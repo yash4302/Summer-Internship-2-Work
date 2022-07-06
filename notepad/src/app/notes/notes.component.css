@@ -1,0 +1,8 @@
+.accordion-body * {
+  font-family: inherit;
+  font-size: inherit;
+  margin: inherit;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}

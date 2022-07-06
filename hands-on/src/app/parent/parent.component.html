@@ -1,0 +1,42 @@
+<div style="text-align: center;">
+  <h4>Parent-Child Communication</h4>
+
+  <div class="form-floating mb-3">
+    <input type="text" class="form-control" id="floatingName" #Number placeholder="First Middle Last">
+    <label for="floatingName">Number of Elements</label>
+  </div>
+  <button class="btn btn-primary" (click)="generate(Number.value)">Generate</button>
+
+  <div>
+    <app-child *ngFor="let n of numbers" [index]="n"></app-child>
+  </div>
+
+  <hr />
+
+  <div>
+    <label>Select Radio Type</label> &nbsp;
+    <select class="form-select-sm w-auto" #radioType (change)="true" style="display: inline-block;">
+      <option value="astro">Astro</option>
+      <option value="dimetra">Dimetra</option>
+    </select>
+
+    <fieldset class="border p-2">
+      <legend class="float-none w-auto p-2">Radio Details</legend>
+
+      <radio-type-input [radioType]="radioType.value" (radioDetailsSubmitted)="processRadio($event)"></radio-type-input>
+
+      <p>Radio Details : {{ value | json }} </p>
+    </fieldset>
+  </div>
+
+  <hr />
+  <fieldset class="border p-2">
+    <legend class="float-none w-auto p-2">Child-Parent Communication</legend>
+    <h5>You Entered : {{ childValue }}</h5>
+
+    <fieldset class="border p-2">
+      <legend class="float-none w-auto p-2">Child</legend>
+      <app-child (sendToParent)="childValue = $event"></app-child>
+    </fieldset>
+  </fieldset>
+</div>

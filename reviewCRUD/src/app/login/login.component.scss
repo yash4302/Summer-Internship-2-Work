@@ -1,0 +1,26 @@
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.msi-card {
+  margin-top: 12%;
+  max-width: 25%;
+  min-width: none;
+  flex-grow: 2;
+  height: 100%;
+}
+
+.msi-input {
+  width: 98%;
+}
+
+.msi-card-title {
+  justify-content: center;
+  padding: 5%;
+}
+
+.msi-btn {
+  width: 98%;
+  margin-bottom: 2%;
+ }

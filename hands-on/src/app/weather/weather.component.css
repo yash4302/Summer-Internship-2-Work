@@ -1,0 +1,21 @@
+.main-section {
+  margin: 2%;
+  text-align: center;
+}
+
+legend {
+  font-weight: bold;
+}
+
+.error{
+  margin: 2%;
+  color: red;
+}
+
+.is-invalid {
+  color: red;
+}
+
+h3 {
+  display: inline-block;
+}

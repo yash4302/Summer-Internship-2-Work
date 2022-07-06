@@ -1,0 +1,23 @@
+<form (submit)="forSubmitted()">
+  <div *ngIf="radioType == 'astro'">
+    <div class="form-floating mb-3">
+      <input type="text" class="form-control" id="floatingName" placeholder="Astro" name="systemId" [(ngModel)]="systemId">
+      <label for="floatingName">System ID</label>
+    </div>
+  </div>
+
+  <div *ngIf="radioType == 'dimetra'">
+    <label>Country Code</label> &nbsp;
+    <select class="form-select w-auto" style="display: inline-block;" name="countryCode" [(ngModel)]="countryCode">
+      <option value="001">001</option>
+      <option value="002">002</option>
+      <option value="003">003</option>
+      <option value="004">004</option>
+      <option value="005">005</option>
+    </select>
+  </div> <br />
+
+  <div>
+    <button type="submit" class="btn btn-success">Submit</button>
+  </div>
+</form>

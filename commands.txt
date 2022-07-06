@@ -1,0 +1,42 @@
+------------------------------------------------------------------------------------
+TypeScript
+------------------------------------------------------------------------------------
+
+1. We can compile a TypeScript file into a JavaScript file by calling:
+tsc hello.ts
+
+2. And we can execute that file by using node, like so:
+node hello.js
+
+3. We can watch a TypeScript file for changes and compile it automatically with:
+tsc -w hello.ts
+
+4. We can provide configuration on the command line, like so:
+tsc -t ES6 -w hello.ts
+
+5. We can create a config file with the most common settings like so:
+tsc --init
+
+6. If we want to watch all files in a directory we can just type:
+tsc -w
+
+------------------------------------------------------------------------------------
+Angular
+------------------------------------------------------------------------------------
+1. Start new Project:
+ng new/n project-name
+
+2. Add new Component:
+ng generate/g component/c component-name
+
+3. Add new Module:
+ng generate/g module/m module-name [--routing]
+
+4. Run the project:
+ng serve/s [--open/-o]
+
+5. Create new custom directive:
+ng generate/g directive/d directive-name
+
+6. Create new Service:
+ng generate/g service/s service-name

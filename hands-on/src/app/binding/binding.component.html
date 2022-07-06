@@ -1,0 +1,22 @@
+<div style="text-align: center;">
+    <fieldset class="border p-2">
+        <legend class="float-none w-auto p-2">One-way Binding</legend>
+
+        <div class="main-section">
+          <p>My name is <strong>{{ myName }}.</strong> </p>
+
+          <button class="btn btn-primary" (click)="changeName()">Change Name</button>
+        </div>
+    </fieldset>
+
+    <fieldset class="border p-2">
+        <legend class="float-none w-auto p-2">Two-way Binding</legend>
+
+        <div class="main-section">
+            <label for="name">Enter Name : </label> &nbsp;
+          <input class="form-control" [(ngModel)]="msg" />
+
+            <p>Message: {{ msg }}</p>
+        </div>
+    </fieldset>
+</div>

@@ -1,0 +1,48 @@
+<div class="main-section">
+  <fieldset class="border p-2">
+    <legend class="float-none w-auto p-2">Reactive Form</legend>
+
+    <form [formGroup]="reactiveForm" (ngSubmit)="save()">
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="floatingNo" placeholder="Number" formControlName="no" [class.error]="!formResetting && reactiveForm.controls.no.errors">
+        <label for="floatingNo">Number</label>
+      </div>
+      <!-- <p class="invalid" *ngIf="!formResetting && reactiveForm.controls.no.errors?.required">
+        Number is Required
+      </p> -->
+
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="floatingName" placeholder="First Middle Last" formControlName="name">
+        <label for="floatingName">Name</label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <input type="tel" class="form-control" id="floatingPhone" placeholder="Your Mobile Number"
+          formControlName="phoneNo">
+        <label for="floatingPhone">Contact Number</label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="floatingEmail" placeholder="First Middle Last" formControlName="email">
+        <label for="floatingEmail">Email</label>
+      </div>
+
+      <div>
+        <input class="form-check-input" type="checkbox" id="flexCheckDefault" formControlName="isComments" (change)="true" />
+        <div class="form-check" style="display: inline-block;">
+          <label class="form-check-label" for="flexCheckDefault">
+            Comments?
+          </label>
+        </div>
+      </div>
+
+      <div class="form-floating mb-3" *ngIf="reactiveForm.controls.isComments.value">
+      <!-- <div class="form-floating mb-3" *ngIf="reactiveForm.value.isComments"> -->
+        <textarea type="text" class="form-control" id="floatingComments" placeholder="Additional Data" formControlName="comments"></textarea>
+        <label for="floatingComments">Comments</label>
+      </div>
+
+      <button type="submit" class="btn btn-success">Register</button>
+    </form>
+  </fieldset>
+</div>

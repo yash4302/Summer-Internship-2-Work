@@ -1,0 +1,315 @@
+---------------------------------------------
+Cobalt Framework
+---------------------------------------------
+
+---------------------------------------------
+Debugging
+---------------------------------------------
+
+---------------------------------------------
+Typescript
+---------------------------------------------
+get: read-only methods
+set: write-only methods
+
+1. Datatypes:
+* Number(all types), Boolean, Date, String, Any, Null, Void
+* (let/const) variable_name:datatype = initial_value;
+
+2. Enum: Same as C++
+
+3. Tuple:
+Arrays (constant)
+
+4. Access Modifiers:
+Public, Private
+
+5. Static members (shared among all objects of same class),
+6. Function overloading,
+7. Constructor,
+8. Class,
+9. Inheritance:
+Same as other OOPL(s).
+* Assigning private or public keyword to a parameter of a constructor create a copy of that parameter for our class with same access modifier.
+e.g., Here both snippet works same.
+Snippet - 1:
+private httpClient: HttpClient;
+
+constructor(httpClient: HttpClient) {
+	// Some code
+	this.httpClient = httpClient;
+}
+
+Snippet - 2:
+constructor(private httpClient: HttpClient) {
+	// Some code
+}
+
+10. Interface:
+interface InterfaceName{
+    // Structure
+}
+
+class XYZ (extends ABC) implements InterfaceName {
+    // Structure
+}
+
+11. Modules:
+module ModuleName {
+    Module Structure
+}
+
+12. Decorators:
+* A TypeScript concept
+* Determines the type of class e.g., whether it is component, services, normal class, module etc.
+* Attached on the top of class or any other property
+- @Component({
+	template: 
+	styles: 
+	templateUrl: 
+	styleUrls: 
+}) // Class decorator
+export class className {}
+- @Input()
+value: member;
+
+---------------------------------------------
+RxJS:
+---------------------------------------------
+* Not only for Angular, but is common for many technologies
+* Advanced concept than Promises
+
+1. Promises (Not in use for 99% cases):
+* While invoking API, promises are used.
+* One-time stuff
+* Gives response and that's finish
+
+2. Observable:
+* Observable in Angular is a feature that provides support for delivering messages between different parts of your single-page application. This feature is frequently used in Angular because it is responsible for handling multiple values, asynchronous programming in Javascript, and also event handling processes.
+
+* Angular makes use of observables as an interface to handle a variety of common asynchronous operations. For example:
+- You can define custom events that send observable output data from a child to a parent component
+- The HTTP module uses observables to handle AJAX requests and responses
+- The Router and Forms modules use observables to listen for and respond to user-input events
+
+* It process to get the changes only to reflect them on UI, rather than fetching entire page with updates
+* Can provide stream of objects/responses/data
+* Gives response and wait to give another responses
+* Life-cycle is life-time
+* One can subscribe for observable
+* Single subscription only
+const a = new Observable();
+a.subscribe((variable:datatype, ...) => {} ); // => : Arrow function/Anonymous function
+a.subscribe(function(response) {} ); // JS notation
+* Send/push a notification:
+a.next(message);
+* Unsubscribe/Destroy:
+a.unsubscribe();
+* To share a single observable amog multiple webpages:
+a.share();
+
+3. Subjects:
+* Advanced than observables
+* Super set of Observables
+* Can push objects/data as well as can subscribe for some other notifications/subscription
+* Subject s = new Subject();
+* e.g., EventEmitter
+* Shared object
+
+* Types:
+	1. Behaviour subjects:
+	* Repeats the last value passed on stream
+
+	2. Replay subjects:
+	* Repeats all the values passed on stream
+
+* forkJoin() === Promise.all() // Waiting for multiple calls to finish
+* forkJoin(
+	httpClient.get(1),
+	httpClient.get(2),
+	...
+	httpClient.get(N)
+	).subscribe(response => {}, error => {}) // Deprecated method of RxJS in newer versions, resultSelector()
+
+---------------------------------------------
+Lodash or Underscore Package:
+---------------------------------------------
+* Collection/Dictionary/Array operations
+* Not limited to Angular only
+
+---------------------------------------------
+Angular:
+---------------------------------------------
+1. Components:
+* Content projectors
+
+2. Modules
+
+3. Event binding () / Property Binding []
+
+4. Angular Life-cycle hooks
+
+5. String Interpolation:
+* e.g., `Hello "$myNameVariable"!` or `${var1} ... ${var2}` // Saves memory
+
+6. Injection
+
+7. Change tracking/detection:
+* Change in a component or a part of a component will not effect the reloading of entire HTML page or DOM
+* Similar to AJAX
+
+8. One-way and Two-way binding
+
+9. Directives:
+	a. Built-in
+	b. Attribute
+	c. Structural
+
+10. Lodash library
+
+11. Component Communication:
+* Way-1: Reference variable <tag #variable> (Not recommonded)
+	We rely on HTML for communication
+	Weak Link
+* Way-2: @Input() & @Output() (Recommonded)
+* Parent to Child:
+Process of generating multiple child components based on some input.
+* Child to Parent
+* Siblings
+
+12. Reactive Forms:
+* FormsModule & ReactiveFormsModule
+* mostly code-driven
+* Supports dynamic validators
+* Create FormBuilder object to design form & listen value changes of form
+* FormGroup: >=1 controls
+
+13. Directives:
+* Directives doesn't have any template by itself.
+a. Custom:
+* Developer-made
+* @Directive({
+	selector: "directive-name"
+})
+export class DirectiveClass {
+	@Input() variables;
+	
+	@HostBinding('property to bind')
+
+	@HostListener('event name on which we are listening')
+	function definition
+}
+b. Structural:
+* Alter the structure of HTML
+
+14. Services:
+* Generic or commonly used code
+* Availble for multiple resources
+* Invoke HTTP requests
+* Invoke API
+* @Injectable()
+@Injectable({
+	providedIn: 'root'
+})
+export class ServiceName {  }
+
+15. Dependency Injection:
+* Improves re-usability
+* Constructor injection
+
+16. Routing:
+* There is no in-built routing module in React, so we have to use some third-party library.
+* URL-based navigation:
+	1. Define Route:
+	* RoutingModule
+
+	2. Actual Navigation:
+	* Static/Hyperlink/Button/Programatic: router.navigateTo()
+	* Dynamic
+
+	3. Lazy Loading (Great for getting good performace):
+	* Initially, not all modules are loaded in memory to increase performance
+	* Dynamically load modules on-demand
+	* { path: '...', ...,
+	loadChildren: () => import('path to module').then(event => event.ModuleName) }
+
+	4. Auth Guard:
+	* Authentication Guard for URL
+	* Used for secured Components
+Source: src/app/_guards/auth-guard.ts
+@Injectable({providedIn: 'root'})
+export class AuthGuard implements CanActivate, CanActivateChild {
+	constructor(Router, AuthenticationService(not an built-in class)) {}
+	async canActivate(ActivatedRouteSnapshot, RouterStateSnapshot) {}
+	canActivateChild(ActivatedRouteSnapshot, RouterStateSnapshot) {}
+}
+
+* {path: 'path/{:variable}', component: ..., canActivate: [AuthGuard]}
+* Sending value to another component through URL:
+	1. Sender side:
+	- Create a Router instance
+	- router.navigateTo('route', {key: value});
+	- router.navigate(['route'], { queryParams: {key: value} });
+	2. Receiver Side:
+	- Create a ActivatedRoute instance
+	- this.variable = this.activatedRoute.snapshot.params.parameter_name;
+
+17. Intercepter:
+* Designed for HttpClients and Http calls
+* is famous for Authorization purpose, but can be used for other purposes
+* @Injectable()
+class AuthIntercepter implements HttpIntercepter {
+	intercept(HttpRequest, nextHttpHandler) {}
+}
+* Relative end-points/constants using environment.ts & environment.prod.ts
+* Http error handling: pipe operator(a function)
+* Shared modules (shared among all child components & modules, but not for lazy loaded modules):
+module-name.module.ts:
+@NgModule({
+...
+providers: [
+	List of shared modules
+]
+})
+
+18. Best Practices:
+* store Development settings in environment.ts
+* store Production settings in environment.prod.ts
+* Inject dynamic things using dependency injections
+* Use enumerations
+* Use folders for better arragement of files and modules
+* Use karma.config.js for test cases
+* View Encapsulation: None, ShadowDom, Emulated
+* Pseudo-classes:
+	1. :host(.class-name) :
+	* Child to parent styling
+	* If we want to style the host element of the component itself, we need the special :host pseudo-class selector.
+	2. ::ng-deep <tag> :
+	* Parent to child styling
+	* shadow-piercing descendant combinator
+	* used to force a style down through the child component tree into all the child component views.
+
+---------------------------------------------
+SOLID Principles
+---------------------------------------------
+1. Single-responsibility Principle (SRP) states:
+A class should have one and only one reason to change, meaning that a class should have only one job.
+
+2. Open-closed Principle (OCP) states:
+Objects or entities should be open for extension but closed for modification.
+This means that a class should be extendable without modifying the class itself.
+
+3. Liskov Substitution Principle states:
+Let q(x) be a property provable about objects of x of type T. Then q(y) should be provable for objects y of type S where S is a subtype of T.
+This means that every subclass or derived class should be substitutable for their base or parent class.
+
+4. Interface segregation principle states:
+A client should never be forced to implement an interface that it doesn’t use, or clients shouldn’t be forced to depend on methods they do not use.
+
+5. Dependency inversion principle states:
+Entities must depend on abstractions, not on concretions. It states that the high-level module must not depend on the low-level module, but they should depend on abstractions.
+This principle allows for decoupling.
+
+---------------------------------------------
+ngx-cookie-service
+ng2-search-filter

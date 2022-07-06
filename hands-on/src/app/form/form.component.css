@@ -1,0 +1,25 @@
+.main-section {
+  text-align: center;
+  margin: 2%;
+}
+
+legend {
+  font-weight: bold;
+  margin: 2%;
+}
+
+form {
+  margin: 2%;
+}
+
+.invalid {
+  color: red;
+  text-align: left;
+  font-size: 10;
+  margin-top: -1%;
+}
+
+.error {
+  border-color: red;
+  color: red;
+}

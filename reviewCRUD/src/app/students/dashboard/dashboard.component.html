@@ -1,0 +1,134 @@
+<app-navbar></app-navbar>
+
+<div class="main-section">
+  <div class="msi-flex">
+    <div class="msi-flex-col">
+      <msi-button-group class="msi-margin-m">
+        <button class="msi-btn" (click)="openNarrativeEditor(tpl)">Add</button>
+        <button class="msi-btn" (click)="deleteAll()">Delete All</button>
+      </msi-button-group>
+    </div>
+  </div>
+
+  <table msi-data-table style="max-width: 96%; min-width: 200px; display: block;" [virtualScroll]="false" [rows]="data">
+
+    <!-- SORTING: include the property to sort by in msiColDef to handle sorting automatically -->
+    <ng-container msiColDef="id" [filterable]="false" [draggable]="false" [resizable]="false">
+      <ng-container *msiHeaderCellDef>Student ID</ng-container>
+      <ng-container *msiCellDef="let row">{{row.id}}</ng-container>
+    </ng-container>
+
+    <!-- FILTERING: UI toggle-only; bind to a callback with your application's logic -->
+    <ng-container msiColDef [sortable]="false" [draggable]="false" [resizable]="true">
+      <ng-container *msiHeaderCellDef>Name</ng-container>
+      <ng-container *msiCellDef="let row">{{row.name}}</ng-container>
+    </ng-container>
+
+    <!-- RESIZING -->
+    <ng-container msiColDef [resizable]="false" [sortable]="false" [filterable]="false" [draggable]="false">
+      <ng-container *msiHeaderCellDef>Contact No.</ng-container>
+      <ng-container *msiCellDef="let row">{{row.contact}}</ng-container>
+    </ng-container>
+
+    <!-- DRAGGING: Note that if you have a mix of draggable and non-draggable columns,
+         non-draggable ones can still be passively pushed around by draggable ones.
+         See "Column Lock" for columns which cannot ever change position. -->
+    <ng-container msiColDef [sortable]="false" [draggable]="true" [resizable]="true">
+      <ng-container *msiHeaderCellDef>Address</ng-container>
+      <ng-container *msiCellDef="let row">{{row.address}}</ng-container>
+    </ng-container>
+
+    <!-- EVERYTHING (with example of a custom sort function callback) -->
+    <ng-container msiColDef="id">
+      <ng-container *msiHeaderCellDef>City</ng-container>
+      <ng-container *msiCellDef="let row">{{row.city}}</ng-container>
+    </ng-container>
+
+    <ng-container msiColDef>
+      <ng-container *msiHeaderCellDef>Edit</ng-container>
+      <ng-container *msiCellDef="let row">
+        <button class="msi-btn msi-btn-action msi-btn-compact" (click)="editItem(row.id, tpl)">
+          <msi-icon name="ic_edit"></msi-icon>
+        </button>
+      </ng-container>
+    </ng-container>
+
+    <ng-container msiColDef>
+      <ng-container *msiHeaderCellDef>Delete</ng-container>
+      <ng-container *msiCellDef="let row">
+        <button class="msi-btn msi-btn-action msi-btn-compact" (click)="deleteItem(row.id)">
+          <msi-icon name="ic_trash"></msi-icon>
+        </button>
+      </ng-container>
+    </ng-container>
+
+    <!-- NOTHING
+    <ng-container msiColDef [sortFunc]="customSort" [sortable]="false" [filterable]="false" [draggable]="false" [resizable]="false">
+      <ng-container *msiHeaderCellDef>No Actions</ng-container>
+      <ng-container *msiCellDef="let row">None {{row.id}}</ng-container>
+    </ng-container> -->
+
+  </table>
+
+</div>
+
+<ng-template #tpl let-modal>
+  <msi-pop-up-modal-header>
+    <msi-pop-up-modal-header-title (click)="modal.toggleMinimized()" [style.height.px]='24' [style.width.px]='24'>{{ modal.title }} <!--- #{{modal.id}} ---></msi-pop-up-modal-header-title>
+
+    <msi-pop-up-modal-header-buttons>
+      <button type="button" class="msi-btn msi-btn-action msi-btn-compact" (click)="modal.toggleMinimized()" [style.height.px]='24' [style.width.px]='24'>
+        <msi-icon [name]="modal.minimized ? 'ic_arrow_up' : 'ic_arrow_down'" [size]="24" color="white"></msi-icon>
+      </button>
+
+      <button type="button" class="msi-btn msi-btn-action msi-btn-compact" (click)="modal.toggleFullscreen()" [style.height.px]='24'>
+        <msi-icon [name]="modal.fullscreen ? 'ic_view_collapse' : 'ic_view_expand'" [size]="24" color="white"></msi-icon>
+      </button>
+
+      <button type="button" class="msi-btn msi-btn-action msi-btn-compact" (click)="confirmBeforeClosing(modal)" [style.height.px]='24'>
+        <msi-icon name="ic_remove" [size]="24" color="white"></msi-icon>
+      </button>
+    </msi-pop-up-modal-header-buttons>
+  </msi-pop-up-modal-header>
+
+  <msi-pop-up-modal-content [modalData]="modal" style="padding-top: 0">
+    <form [formGroup]="newItemForm" (ngSubmit)="submit()">
+      <label class="msi-label" for="ID">ID</label>
+      <input id="ID" class="msi-input" formControlName="id" id="readonly" value="readonly" readonly />
+
+      <label class="msi-label" for="Name">Name</label>
+      <input id="Name" class="msi-input" formControlName="name"/>
+
+      <label class="msi-label" for="Address">Address</label>
+      <textarea class="msi-textarea" id="Address" cols="30" style="min-height: 100px;" formControlName="address"></textarea>
+
+      <label class="msi-label" for="Contact">Contact</label>
+      <input id="Contact" class="msi-input" formControlName="contact"/>
+
+      <label class="msi-label" for="City">City</label>
+      <input id="City" class="msi-input" formControlName="city"/>
+    </form>
+
+    <div style="padding: 5px 3px 0 3px" class="d-flex justify-content-between buttons-container">
+      <button class="msi-btn msi-btn-action msi-btn-compact" (click)="deleteDraft()">
+        <msi-icon name="ic_trash"></msi-icon>
+      </button>
+
+      <div style="display: inline-block">
+        <button class="msi-btn" style="margin-top: 4px;" (click)="saveDraft()">Save Draft</button>
+        <button class="msi-btn" style="margin-top: 4px;" (click)="submit()">Submit</button>
+      </div>
+    </div>
+  </msi-pop-up-modal-content>
+</ng-template>
+
+<ng-template #confirmationModalTemplate>
+  <msi-modal>
+    <msi-modal-header>Discard Changes?</msi-modal-header>
+    <msi-modal-content>The edited content won't be saved.</msi-modal-content>
+    <msi-modal-actions align="end">
+      <button type="button" class="msi-btn msi-btn-action" (click)="confirmationModalOnCancel()">Cancel</button>
+      <button type="button" class="msi-btn spinner-parent" (click)="confirmationModalOnConfirm()">Discard</button>
+    </msi-modal-actions>
+  </msi-modal>
+</ng-template>

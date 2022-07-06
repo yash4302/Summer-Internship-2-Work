@@ -1,0 +1,120 @@
+<div style="text-align: center;">
+  <fieldset class="border p-2">
+      <legend class="float-none w-auto p-2">ngIf</legend>
+
+      <div class="main-section" style="text-align: center;">
+        <div class="mandatory-detail">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingName" placeholder="First Middle Last">
+            <label for="floatingName">Name</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="tel" class="form-control" id="floatingPhone" placeholder="Your Mobile Number">
+            <label for="floatingPhone">Contact Number</label>
+          </div>
+        </div>
+
+        <input class="form-check-input" type="checkbox" id="flexCheckDefault" #additional (change)="true" />
+        <div class="form-check" style="display: inline-block;">
+          <label class="form-check-label" for="flexCheckDefault">
+            Add Additional Details
+          </label>
+        </div>
+
+        <div *ngIf="additional.checked">
+          <div class="form-floating mb-3">
+            <textarea class="form-control" id="floatingAddress" placeholder="Address"></textarea>
+            <label for="floatingAddress">Address</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingCity" placeholder="California">
+            <label for="floatingCity">City</label>
+          </div>
+        </div>
+
+      </div>
+  </fieldset>
+
+  <fieldset class="border p-2">
+      <legend class="float-none w-auto p-2">ngFor</legend>
+
+      <h5>Selected Students</h5>
+      <div class="main-section">
+        <h5>Method 1</h5>
+        <ol>
+          <li *ngFor="let name of names">{{ name }}</li>
+        </ol>
+
+        <h5>Method 2</h5>
+        <p *ngFor="let name of names; let i = index">
+          {{ i+1 }}. {{ name }}
+        </p>
+      </div>
+  </fieldset>
+
+  <fieldset class="border p-2">
+    <legend class="float-none w-auto p-2">ID</legend>
+
+    <h5 [class.red]="colorID.value == 'red'"
+        [class.blue]="colorID.value == 'blue'"
+        [class.green]="colorID.value == 'green'">
+        Rainbow 1</h5>
+    <h5 [class]="colorID.value">Rainbow 2</h5>
+    <select (change)="true" #colorID>
+      <option value="red" selected>Red</option>
+      <option value="green">Green</option>
+      <option value="blue">Blue</option>
+    </select>
+  </fieldset>
+
+  <fieldset class="border p-2">
+    <legend class="float-none w-auto p-2">ngClass</legend>
+
+    <h5 [ngClass]="colorClass.value">Rainbow</h5>
+    <select (change)="true" #colorClass>
+      <option value="red" selected>Red</option>
+      <option value="green">Green</option>
+      <option value="blue">Blue</option>
+    </select>
+  </fieldset>
+
+  <fieldset class="border p-2">
+    <legend class="float-none w-auto p-2">Style</legend>
+
+    <h5 [style.color]="colorStyle.value == 'red' ? 'red' :
+                        colorStyle.value == 'green' ? 'green' : 'blue'">
+        Rainbow 1</h5>
+    <h5 [style.color]="colorStyle.value">Rainbow 2</h5>
+    <select (change)="true" #colorStyle>
+      <option value="red" selected>Red</option>
+      <option value="green">Green</option>
+      <option value="blue">Blue</option>
+    </select>
+  </fieldset>
+
+  <fieldset class="border p-2">
+    <legend class="float-none w-auto p-2">ngStyle</legend>
+
+    <h5 [ngStyle]="{'color': colorNGStyle.value}">Rainbow</h5>
+    <select (change)="true" #colorNGStyle>
+      <option value="red" selected>Red</option>
+      <option value="green">Green</option>
+      <option value="blue">Blue</option>
+    </select>
+  </fieldset>
+
+  <fieldset class="border p-2">
+    <legend class="float-none w-auto p-2">Custom</legend>
+
+    <h5 appAdvanced defaultColor="violet">Rainbow 1</h5>
+    <h5 [appAdvanced]="colorCusStyle.value">Rainbow 2</h5>
+    <h5 appAdvanced>Rainbow 3</h5>
+    <select (change)="true" #colorCusStyle>
+      <option value="red" selected>Red</option>
+      <option value="green">Green</option>
+      <option value="blue">Blue</option>
+    </select>
+  </fieldset>
+</div>

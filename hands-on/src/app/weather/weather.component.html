@@ -1,0 +1,25 @@
+<!-- https://stackblitz.com/edit/angular-lifecycle-with-weather-api?file=app%2Fcomponents%2Fmap.component.ts,app%2Fcomponents%2Fmeteo.component.ts,app%2Fapp.component.ts -->
+<div class="main-section">
+  <fieldset class="border p-2">
+    <legend class="float-none w-auto p-2">Enter City Details</legend>
+
+    <form [formGroup]="weatherForm" (ngSubmit)="getWeather()">
+      <div class="form-floating mb-3" [class.is-invalid]="(result && result.cod == 404) || !formResetting">
+        <input type="text" class="form-control" id="floatingCity" placeholder="city" formControlName="city" [class.is-invalid]="(result && result.cod == 404) || !formResetting">
+        <label for="floatingCity">City</label>
+      </div>
+
+      <button class="btn btn-success" type="submit">Get Weather</button>
+    </form>
+  </fieldset>
+
+  <fieldset class="border p-2" *ngIf="result && result.cod == 200">
+    <legend class="float-none w-auto p-2">Weather of {{ sentenceCase(cityName) }}</legend>
+
+    <img [src]="weatherIconURL + result?.weather[0].icon + '.png'">
+    <h3>{{ result.main.temp }} °C / {{ sentenceCase(result.weather[0].description) }}</h3>
+  </fieldset>
+
+  <h4 class="error" *ngIf="result && result.cod == 404">{{ sentenceCase(result.message) }}</h4>
+  <h4 class="error" *ngIf="result == null && !formResetting">Enter a city name</h4>
+</div>
